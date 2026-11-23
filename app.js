@@ -88,3 +88,16 @@ function showToast(msg) {
     location.reload();
   }
 })();
+/* ============================================================
+   TEMA GELAP / TERANG
+   ============================================================ */
+function applyTheme(t) {
+  document.documentElement.dataset.theme = t;
+  const b = document.getElementById('themeBtn');
+  if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+function toggleTheme() {
+  applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+}
+applyTheme(localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
